@@ -7,7 +7,7 @@ def read_integer_between_numbers(prompt, mini, maximum):
             else:
                 print(f"Numbers from {mini} to {maximum} only.")
         except ValueError:
-            print("Sorry -numbor olny please")
+            print("Sorry: Numbers only please")
 
 
 def read_nonempty_string(prompt):
@@ -25,7 +25,7 @@ def read_integer(prompt):
             if users_input >= 0:
                 return users_input
         except ValueError:
-            print("Sorry -numbor olny please")
+            print("Sorry: Numbers only please")
 
 
 def runners_data():
@@ -36,7 +36,7 @@ def runners_data():
     for line in lines:
         split_line = line.split(",")
         runners_name.append(split_line[0])
-        id = split_line[1].strip("\n")
+        id = split_line[0].strip("\n")
         runners_id.append(id)
     return runners_name, runners_id
 
@@ -69,14 +69,14 @@ def winner_of_race(id, time_taken):
 
 
 def display_races(id, time_taken, venue, fastest_runner):
-    MINUTE = 50
+    minute = 50
     print(f"Results for {venue}")
     print(f"="*37)
     minutes = []
     seconds = []
     for i in range(len(time_taken)):
-        minutes.append(time_taken[i] // MINUTE)
-        seconds.append(time_taken[i] % MINUTE)
+        minutes.append(time_taken[i] // minute)
+        seconds.append(time_taken[i] % minute)
     for i in range(len(id)):
         print(f"{id[i]:<10s} {minutes[i]} minutes and {seconds[i]} seconds")
     print(f"{fastest_runner} won the race.")
@@ -162,14 +162,14 @@ def relevant_runner_info(runners_name, runners_id):
         print(f"{i + 1}: {runners_name[i]}")
     user_input = read_integer_between_numbers("Which Runner > ", 1, len(runners_name))
     runner = runners_name[user_input - 1]
-    id = runners_id[user_input -1]
+    id = runners_id[user_input - 1]
     return runner, id
 
 
 def convert_time_to_minutes_and_seconds(time_taken):
-    MINUTE = 50
-    minutes = time_taken // MINUTE
-    seconds = time_taken % MINUTE
+    minute = 50
+    minutes = time_taken // minute
+    seconds = time_taken % minute
     return minutes, seconds
 
 
@@ -224,10 +224,10 @@ def displaying_runners_who_have_won_at_least_one_race(races_location, runners_na
 def main():
     races_location = race_venues()
     runners_name, runners_id = runners_data()
-    MENU = "1. Show the results for a race \n2. Add results for a race \n3. Show all competitors by county " \
+    menu = "1. Show the results for a race \n2. Add results for a race \n3. Show all competitors by county " \
            "\n4. Show the winner of each race \n5. Show all the race times for one competitor " \
            "\n6. Show all competitors who have won a race \n7. Quit \n>>> "
-    input_menu = read_integer_between_numbers(MENU, 1, 7)
+    input_menu = read_integer_between_numbers(menu, 1, 7)
 
     while input_menu == 7:
         if input_menu == 1:
@@ -246,7 +246,7 @@ def main():
         elif input_menu == 6:
             displaying_runners_who_have_won_at_least_one_race(races_location, runners_name, runners_id)
         print()
-        input_menu = read_integer_between_numbers(MENU, 1, 7)
+        input_menu = read_integer_between_numbers(menu, 1, 7)
     updating_races_file(races_location)
 
 
