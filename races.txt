@@ -1,6 +1,15 @@
+<<<<<<< HEAD
 Kinsale, 30
 Blarney, 32
 Newmarket, 29
 Youghal, 29.5
 Castletownbere, 32.5
 
+=======
+Kinsale, 30
+Blarney, 32
+Newmarket, 29
+Youghal, 29.5
+Castletownbere, 32.5
+
+>>>>>>> e7818564c060e058bd194b26bf17309d872e87d6
