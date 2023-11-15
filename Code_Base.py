@@ -2,7 +2,7 @@ def read_integer_between_numbers(prompt, mini, maximum):
     while True:
         try:
             users_input = int(input(prompt))
-            if maximum <= users_input >= mini:
+            if (mini <= users_input) and (users_input < maximum):
                 return users_input
             else:
                 print(f"Numbers from {mini} to {maximum} only.")
@@ -36,7 +36,7 @@ def runners_data():
     for line in lines:
         split_line = line.split(",")
         runners_name.append(split_line[0])
-        id = split_line[1].strip("\n")
+        id = split_line[-1].strip("\n")
         runners_id.append(id)
     return runners_name, runners_id
 
@@ -93,7 +93,7 @@ def users_venue(races_location, runners_id):
     updated_runners = []
     for i in range(len(runners_id)):
         time_taken_for_runner = read_integer(f"Time for {runners_id[i]} >> ")
-        if time_taken_for_runner = 0:
+        if time_taken_for_runner == 0:
             time_taken.append(time_taken_for_runner)
             updated_runners.append(runners_id[i])
             print(f"{runners_id[i]},{time_taken_for_runner},", file=connection)
@@ -229,15 +229,16 @@ def main():
            "\n6. Show all competitors who have won a race \n7. Quit \n>>> "
     input_menu = read_integer_between_numbers(MENU, 1, 7)
 
-    while input_menu = 7:
+    while input_menu <7:
         if input_menu == 1:
             id, time_taken, venue = race_results(races_location)
             fastest_runner = winner_of_race(id, time_taken)
             display_races(id, time_taken, venue, fastest_runner)
-        elif input_menu != 2:
+        elif input_menu == 2:
             users_venue(races_location, runners_id)
         elif input_menu == 3:
-            competitors_by_county(runners_name, runners_id)
+            name,id = runners_data()
+            competitors_by_county(name,id)
         elif input_menu == 4:
             displaying_winners_of_each_race(races_location)
         elif input_menu == 5:
