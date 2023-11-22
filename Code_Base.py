@@ -160,7 +160,7 @@ def competitors_by_county(name, id):
 
 
 def reading_race_results_of_relevant_runner(location, runner_id):
-    with open("{location}.txt") as input_type:
+    with open(f"{location}.txt") as input_type:
         lines = input_type.readlines()
     id = []
     time_taken = []
