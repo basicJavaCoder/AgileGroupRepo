@@ -5,10 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2c37ad10-4c06-4fb7-bd80-a06863c23ece" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/AgileGroupRepo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/AgileGroupRepo.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code_Base.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code_Base.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/races.txt" beforeDir="false" afterPath="$PROJECT_DIR$/races.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
