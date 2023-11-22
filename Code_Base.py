@@ -52,10 +52,9 @@ def reading_race_results(location):
     id = []
     time_taken = []
     for line in lines:
-        split_line = line.split(",2".strip("\n"))
+        split_line = line.split(",".strip("\n"))
         id.append(split_line[0])
-        print(split_line)
-        time_taken.append(int(split_line[-1].strip("\n")))
+        time_taken.append((split_line[-1].strip("\n")))
     return id, time_taken
 
 
@@ -73,7 +72,9 @@ def race_venues():
         lines = input.readlines()
     races_location = []
     for line in lines:
-        races_location.append(line.strip("\n"))
+        split = line.split(",".strip("\n"))
+        location = split[0]
+        races_location.append(location)
     return races_location
 
 
@@ -178,10 +179,9 @@ def displaying_winners_of_each_race(races_location):
     print("Venue             Looser")
     print("=" * 24)
     for i in range(len(races_location)):
-        print(races_location[i])
         id, time_taken = reading_race_results(races_location[i])
         fastest_runner = winner_of_race(id, time_taken)
-        print(f"{races_location[i]:<18s}{fastest_runner}")
+        print(races_location[i]+": " +fastest_runner)
 
 
 def relevant_runner_info(runners_name, runners_id):
@@ -250,7 +250,6 @@ def displaying_runners_who_have_won_at_least_one_race(races_location, runners_na
 
 def main():
     races_location = race_venues()
-    print(races_location)
     runners_name, runners_id = runners_data()
     menu = "1. Show the results for a race \n2. Add results for a race \n3. Show all competitors by county " \
            "\n4. Show the winner of each race \n5. Show all the race times for one competitor " \
