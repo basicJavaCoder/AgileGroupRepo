@@ -1,1 +1,4 @@
-print("Hello from test.py")
+import pytest
+
+def test_raises_exception():
+    with pytest.raises(ZeroDivisionError):
