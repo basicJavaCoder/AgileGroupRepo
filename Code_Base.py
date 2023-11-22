@@ -72,13 +72,9 @@ def race_venues():
         lines = input.readlines()
     races_location = []
     for line in lines:
-<<<<<<< HEAD
-        races_location.append(line.strip(","))
-=======
         split = line.split(",".strip("\n"))
         location = split[0]
         races_location.append(location)
->>>>>>> 540a1c39b03a531062976dfe9246cd56300cda71
     return races_location
 
 
