@@ -1,4 +1,4 @@
 import pytest
 
-with self.assertRaises(FileNotFoundError):
+with assertRaises(FileNotFoundError):
     print("FileNotFoundError detected")
