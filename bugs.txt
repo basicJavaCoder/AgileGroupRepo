@@ -1,3 +1,5 @@
 task1: incorrect index for results for option1
 
 task2: race_venues() function does not extract location only
+
+task3: not printing id for optipn4
