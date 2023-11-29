@@ -114,7 +114,7 @@ def users_venue(races_location, runners_id):
         if time_taken_for_runner == 0:
             time_taken.append(time_taken_for_runner)
             updated_runners.append(runners_id[i])
-            print(f"{runners_id[i]},{time_taken_for_runner},", file=connection)
+            print(f"{runners_id[i]},{time_taken_for_runner}", file=connection)
     connection.close()
 
 
