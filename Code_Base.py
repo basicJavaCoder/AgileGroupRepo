@@ -240,13 +240,7 @@ def displaying_runners_who_have_won_at_least_one_race(races_location, runners_na
     for i, location in enumerate(races_location):
         id, time_taken = reading_race_results(location)
         fastest_runner = winner_of_race(id, time_taken)
-<<<<<<< HEAD
-        name_of_runner = finding_name_of_winner(fastest_runner, runners_id, runners_name)
-       
-=======
-        # name_of_runner = finding_name_of_winner(fastest_runner, runners_id, runners_name)
 
->>>>>>> b274e33872325086c550fa6dee7c95636b788af1
         if fastest_runner not in winners:
             winners.append(fastest_runner)
             name_of_runner = finding_name_of_winner(fastest_runner, runners_id, runners_name)
@@ -259,13 +253,11 @@ def displaying_runners_who_have_won_at_least_one_race(races_location, runners_na
             print(f"{runners_name[i]}, {runners_id[i]}")
 
 
-
 # task 7
 def competitors_not_on_podium(races_location, runners_name, runners_id):
     print("Competitors who have not taken a podium position in any race:")
     print("=" * 60)
     podium_finishers = []
-
 
     # Find all the podium finishers
     for location in races_location:
@@ -274,9 +266,7 @@ def competitors_not_on_podium(races_location, runners_name, runners_id):
             if i < len(race_results):
                 podium_finishers.append(race_results[i][0])  # Assuming the top 3 runners are on the podium
 
-
     non_podium_competitors = []
-
 
     # Find competitors who are not on the podium in any race
     for runner_id in runners_id:
@@ -292,15 +282,12 @@ def competitors_not_on_podium(races_location, runners_name, runners_id):
         if not found_on_podium:
             non_podium_competitors.append(runner_id)
 
-
     if len(non_podium_competitors) == 0:
         print("All competitors have taken a podium position in at least one race.")
     else:
         for runner_id in non_podium_competitors:
             i = runners_id.index(runner_id)
             print(f"{runners_name[i]} ({runner_id})")
-
-
 
 
 def main():
