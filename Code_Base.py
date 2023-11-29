@@ -1,16 +1,20 @@
-def read_integer_between_numbers(prompt, mini, maximum, input_func=input):
+def read_integer_between_numbers(prompt, mini, maximum):
     while True:
         try:
-            users_input = int(input_func(prompt))
+            users_input = int(input(prompt))
             if (mini <= users_input) and (users_input < maximum):
                 print(f"Received input: {users_input}")  # Debugging print statement
 
             if mini <= users_input <= maximum:
                 return users_input
+
             else:
                 print(f"Please enter a number between {mini} and {maximum}.")
         except ValueError:
             print("Sorry: Numbers only please")
+        except EOFError:
+            print("End of input reached.")
+            break
 
 
 def read_nonempty_string(prompt):
@@ -50,10 +54,9 @@ def reading_race_results(location):
     id = []
     time_taken = []
     for line in lines:
-        split_line = line.split(",".strip("\n"))
+        split_line = line.strip().split(",")  # Remove unnecessary strip("\n") and fix the split
         id.append(split_line[0])
-        time_taken.append(int(split_line[-1].strip()))
-
+        time_taken.append(int(split_line[-1]))  # Convert the last element to an integer
     return id, time_taken
 
 
@@ -71,10 +74,10 @@ def race_venues():
         lines = input.readlines()
     races_location = []
     for line in lines:
-        location = line.strip()  # Strip newline characters
+        split = line.split("\n")
+        location = split[0]
         races_location.append(location)
     return races_location
-
 
 
 def winner_of_race(id, time_taken):
@@ -114,7 +117,7 @@ def users_venue(races_location, runners_id):
         if time_taken_for_runner == 0:
             time_taken.append(time_taken_for_runner)
             updated_runners.append(runners_id[i])
-            print(f"{runners_id[i]},{time_taken_for_runner}", file=connection)
+            print(f"{runners_id[i]},{time_taken_for_runner},", file=connection)
     connection.close()
 
 
@@ -125,37 +128,59 @@ def updating_races_file(races_location):
     connection.close()
 
 
-def competitors_by_county(name, id):
-    print("Cork runners")
-    print("=" * 20)
-    for i in range(len(name)):
-        if id[i].startswith("CK"):
-            print(f"{name[i]} ({id[i]})")
-    print("Kerry runners")
-    print("=" * 20)
-    for i in range(len(name)):
-        if id[i].startswith("KY"):
-            print(f"{name[i]} ({id[i]})")
-    print("Tipperary runners")
-    print("=" * 20)
-    for i in range(len(name)):
-        if id[i].startswith("TP"):
-            print(f"{name[i]} ({id[i]})")
-    print("Limerick runners")
-    print("=" * 20)
-    for i in range(len(name)):
-        if id[i].startswith("LK"):
-            print(f"{name[i]} ({id[i]})")
-    print("Waterford runners")
-    print("=" * 20)
-    for i in range(len(name)):
-        if id[i].startswith("WD"):
-            print(f"{name[i]} ({id[i]})")
+def checkrunnerid(name):
+    match name:
+        case "Anna Fox":
+            return "CK-24"
+        case "Des Kelly":
+            return "CK-23 "
+        case "Ann Cahill":
+            return "KY-43"
+        case "Joe Flynn":
+            return "CK-11"
+        case "Sally Fox":
+            return "KY-12"
+        case "Joe Shine":
+            return "TP-02"
+        case "Lisa Collins":
+            return "WD-32 "
+        case "Sil Murphy":
+            return "LK-73"
+        case "Des Kelly":
+            return "WD-19"
+
+
+def competitors_by_county(name):
     print("Clare runners")
     print("=" * 20)
     for i in range(len(name)):
         if id[i].startswith("CL"):
-            print(f"{name[i]} ({id[i]})")
+            print(f"{name[i]} ({checkrunnerid(name[i])})")
+    print("Cork runners")
+    print("=" * 20)
+    for i in range(len(name)):
+        if id[i].startswith("CK"):
+            print(f"{name[i]} ({checkrunnerid(name[i])})")
+    print("Kerry runners")
+    print("=" * 20)
+    for i in range(len(name)):
+        if id[i].startswith("KY"):
+            print(f"{name[i]} ({checkrunnerid(name[i])})")
+    print("Limerick runners")
+    print("=" * 20)
+    for i in range(len(name)):
+        if id[i].startswith("LK"):
+            print(f"{name[i]} ({checkrunnerid(name[i])})")
+    print("Tipperary runners")
+    print("=" * 20)
+    for i in range(len(name)):
+        if id[i].startswith("TP"):
+            print(f"{name[i]} ({checkrunnerid(name[i])})")
+    print("Waterford runners")
+    print("=" * 20)
+    for i in range(len(name)):
+        if id[i].startswith("WD"):
+            print(f"{name[i]} ({checkrunnerid(name[i])})")
 
 
 def reading_race_results_of_relevant_runner(location, runner_id):
@@ -175,7 +200,7 @@ def reading_race_results_of_relevant_runner(location, runner_id):
 
 
 def displaying_winners_of_each_race(races_location):
-    print("Venue             Loser")
+    print("Venue             Winner")
     print("=" * 24)
     for i in range(len(races_location)):
         id, time_taken = reading_race_results(races_location[i])
@@ -257,6 +282,40 @@ def displaying_runners_who_have_won_at_least_one_race(races_location, runners_na
 def competitors_not_on_podium(races_location, runners_name, runners_id):
     print("Competitors who have not taken a podium position in any race:")
     print("=" * 60)
+
+    podium_finishers = set()
+
+    # Find all the podium finishers
+    for location in races_location:
+        id, time_taken = reading_race_results(location)
+        if len(id) >= 3:  # Assuming the top 3 runners are on the podium
+            podium_finishers.add(id[0])
+            podium_finishers.add(id[1])
+            podium_finishers.add(id[2])
+
+    non_podium_competitors = []
+
+    # Find competitors who are not on the podium in any race
+    for runner_id in runners_id:
+        found_on_podium = False
+        for location in races_location:
+            id, _ = reading_race_results(location)
+            if runner_id in podium_finishers:
+                found_on_podium = True
+                break
+        if not found_on_podium:
+            non_podium_competitors.append(runner_id)
+
+    if len(non_podium_competitors) == 0:
+        print("All competitors have taken a podium position in at least one race.")
+    else:
+        for runner_id in non_podium_competitors:
+            i = runners_id.index(runner_id)
+            print(f"{runners_name[i]} ({runner_id})")
+
+    # Rest of your code remains unchanged
+    print("Competitors who have not taken a podium position in any race:")
+    print("=" * 60)
     podium_finishers = []
 
     # Find all the podium finishers
@@ -293,13 +352,15 @@ def competitors_not_on_podium(races_location, runners_name, runners_id):
 def main():
     races_location = race_venues()
     runners_name, runners_id = runners_data()
-    menu = "\n1. Show the results for a race \n2. Add results for a race \n3. Show all competitors by county " \
-           "\n4. Show the winner of each race \n5. Show all the race times for one competitor " \
+    menu = "\n\n1. Show the results for a race " \
+           "\n2. Add results for a race " \
+           "\n3. Show all competitors by county " \
+           "\n4. Show the winner of each race " \
+           "\n5. Show all the race times for one competitor " \
            "\n6. Show all competitors who have won a race " \
            "\n7. Show all competitors who have not taken a podium-position in any race. " \
            "\n8. Quit \n "
     input_menu = read_integer_between_numbers(menu, 1, 8)
-
     while input_menu != 8:
 
         if input_menu == 1:
@@ -312,7 +373,7 @@ def main():
 
         elif input_menu == 3:
             runners_name, runners_id = runners_data()
-            competitors_by_county(runners_name, runners_id)
+            competitors_by_county(runners_name)
 
         elif input_menu == 4:
             displaying_winners_of_each_race(races_location)
