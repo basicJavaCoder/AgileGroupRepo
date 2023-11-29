@@ -14,7 +14,7 @@ def test_file_not_found_error():
 
 
 def code_that_raises_Index_Error():
-    read_integer_between_numbers("Input:", 1, 12)
+    read_integer_between_numbers("Input:", 1, 12, 14)
     raise IndexError("Index Out of Bounds")
 
 
