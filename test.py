@@ -17,6 +17,7 @@ def code_that_raises_Index_Error():
     read_integer_between_numbers("Input:", 1, 12)
     raise IndexError("Index Out of Bounds")
 
+
 def test_List_out_Of_bounds():
-    with pytest.raises(IndexError)
+    with pytest.raises(IndexError):
         code_that_raises_Index_Error()
