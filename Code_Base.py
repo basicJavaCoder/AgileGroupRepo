@@ -9,7 +9,6 @@ def read_integer_between_numbers(prompt, mini, maximum):
                 return users_input
 
             else:
-
                 print(f"Please enter a number between {mini} and {maximum}.")
         except ValueError:
             print("Sorry: Numbers only please")
@@ -234,26 +233,25 @@ def finding_name_of_winner(fastest_runner, id, runners_name):
 def displaying_runners_who_have_won_at_least_one_race(races_location, runners_name, runners_id):
     print(f"The following runners have all won at least one race:")
     print(f"-" * 55)
-   
+
     winners = []
     runners = []
-   
+
     for i, location in enumerate(races_location):
         id, time_taken = reading_race_results(location)
         fastest_runner = winner_of_race(id, time_taken)
         # name_of_runner = finding_name_of_winner(fastest_runner, runners_id, runners_name)
-       
+
         if fastest_runner not in winners:
             winners.append(fastest_runner)
             name_of_runner = finding_name_of_winner(fastest_runner, runners_id, runners_name)
             runners.append(name_of_runner)
-           
+
     if len(winners) == 0:
-            print("No runners have won a race.")
+        print("No runners have won a race.")
     else:
         for i, fastest_runner in enumerate(winners):
             print(f"{runners_name[i]}, {winners[i]}")
-
 
 
 def main():
