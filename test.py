@@ -10,8 +10,3 @@ def code_that_raises_file_not_found_error():
 def test_file_not_found_error():
     with pytest.raises(FileNotFoundError):
         code_that_raises_file_not_found_error()
-
-
-
-if __name__ == '__main__':
-    unittest.main()
