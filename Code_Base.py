@@ -1,7 +1,7 @@
-def read_integer_between_numbers(prompt, mini, maximum):
+def read_integer_between_numbers(prompt, mini, maximum, input_func=input):
     while True:
         try:
-            users_input = int(input(prompt))
+            users_input = int(input_func(prompt))
             if (mini <= users_input) and (users_input < maximum):
                 print(f"Received input: {users_input}")  # Debugging print statement
 
@@ -293,7 +293,7 @@ def competitors_not_on_podium(races_location, runners_name, runners_id):
 def main():
     races_location = race_venues()
     runners_name, runners_id = runners_data()
-    menu = "1. Show the results for a race \n2. Add results for a race \n3. Show all competitors by county " \
+    menu = "\n1. Show the results for a race \n2. Add results for a race \n3. Show all competitors by county " \
            "\n4. Show the winner of each race \n5. Show all the race times for one competitor " \
            "\n6. Show all competitors who have won a race " \
            "\n7. Show all competitors who have not taken a podium-position in any race. " \
