@@ -12,6 +12,9 @@ def read_integer_between_numbers(prompt, mini, maximum):
                 print(f"Please enter a number between {mini} and {maximum}.")
         except ValueError:
             print("Sorry: Numbers only please")
+        except EOFError:
+            print("End of input reached.")
+            break
 
 
 def read_nonempty_string(prompt):
@@ -55,7 +58,6 @@ def reading_race_results(location):
         id.append(split_line[0])
         time_taken.append(int(split_line[-1]))  # Convert the last element to an integer
     return id, time_taken
-
 
 
 def race_results(races_location):
@@ -289,8 +291,7 @@ def competitors_not_on_podium(races_location, runners_name, runners_id):
             i = runners_id.index(runner_id)
             print(f"{runners_name[i]} ({runner_id})")
 
-
-# Rest of your code remains unchanged
+    # Rest of your code remains unchanged
     print("Competitors who have not taken a podium position in any race:")
     print("=" * 60)
     podium_finishers = []
