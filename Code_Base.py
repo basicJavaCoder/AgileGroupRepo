@@ -12,9 +12,9 @@ def read_integer_between_numbers(prompt, mini, maximum):
                 print(f"Please enter a number between {mini} and {maximum}.")
         except ValueError:
             print("Sorry: Numbers only please")
-        except EOFError:
-            print("End of input reached.")
-            break
+        # except EOFError:
+        #     print("End of input reached.")
+        #     break
 
 
 def read_nonempty_string(prompt):
