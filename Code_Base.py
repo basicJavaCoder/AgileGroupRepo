@@ -7,7 +7,6 @@ def read_integer_between_numbers(prompt, mini, maximum, input_func=input):
 
             if mini <= users_input <= maximum:
                 return users_input
-
             else:
                 print(f"Please enter a number between {mini} and {maximum}.")
         except ValueError:
