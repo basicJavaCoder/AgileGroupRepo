@@ -33,7 +33,7 @@ def read_integer(prompt):
 
 
 def runners_data():
-    with open("runners1.txt") as input:
+    with open("runners.txt") as input:
         lines = input.readlines()
     runners_name = []
     runners_id = []
