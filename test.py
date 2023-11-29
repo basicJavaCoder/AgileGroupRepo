@@ -1,6 +1,5 @@
 import unittest
 import pytest
-import race_results
 
 
 def code_that_raises_file_not_found_error():
